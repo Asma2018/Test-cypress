@@ -46,16 +46,15 @@ describe("Login test", () => {
     cy.wait(5000);
     cy.get("input[type=submit]").contains("Save").click();
 
-    //Add comments to the card
-    cy.get('textarea[placeholder="Write a comment…"]').type("Done");
-    cy.get("input[type=submit]").contains("Save").click();
-
-    cy.get('textarea[placeholder="Write a comment…"]').type(
-      "working on this task"
-    );
-
+    // Add comments to the card
     cy.wait(5000);
-    cy.get(".js-tab-parent").children().contains("Save").click();
+
+    for (let i = 1; i <= 5; i++) {
+      cy.get('textarea[placeholder="Write a comment…"]').type(`comment ${i}`);
+
+      cy.wait(5000);
+      cy.get(".js-tab-parent").children().contains("Save").click();
+    }
     // take screenshot
     cy.screenshot();
   });
