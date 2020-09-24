@@ -10,26 +10,17 @@ describe("Login test", () => {
 
       .first()
 
-      .type("abc@hotmail.com")
-
-      .should("have.value", "abc@hotmail.com");
+      .type("invalid_email.com'");
 
     // Fill the password
 
-    cy.get("input[name=password]")
-
-      .type("123")
-
-      .should("have.value", "123");
+    cy.get("input[name=password]").type("invalidpassword");
 
     // Locate and submit the form
 
     cy.get("#login-form").submit();
-    //cy.get(".success-page").should("be.visible");
 
-    cy.url().should("include", "/boards");
+    cy.get("#error").should("be.visible");
     cy.screenshot();
-
-    //cy.get("button").contains("Remind me later").click();
   });
 });
