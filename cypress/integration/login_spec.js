@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { email, password } from "./constants";
+
 describe("Login test", () => {
   it("Fill login form", () => {
     cy.visit("https://trello.com/login");
@@ -10,17 +12,17 @@ describe("Login test", () => {
 
       .first()
 
-      .type("abc@hotmail.com")
+      .type(email)
 
-      .should("have.value", "abc@hotmail.com");
+      .should("have.value", email);
 
     // Fill the password
 
     cy.get("input[name=password]")
 
-      .type("123")
+      .type(password)
 
-      .should("have.value", "123");
+      .should("have.value", password);
 
     // Locate and submit the form
 

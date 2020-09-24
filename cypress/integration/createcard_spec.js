@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { password, email } from "./constants";
+
 describe("Login test", () => {
   it("Fill login form", () => {
     cy.visit("https://trello.com/login");
@@ -10,21 +12,22 @@ describe("Login test", () => {
 
       .first()
 
-      .type("abc@hotmail.com")
+      .type(email)
 
-      .should("have.value", "abc@hotmail.com");
+      .should("have.value", email);
 
     // Fill the password
 
     cy.get("input[name=password]")
 
-      .type("123")
+      .type(password)
 
-      .should("have.value", "123");
+      .should("have.value", password);
 
     // Locate and submit the form
 
     cy.get("#login-form").submit();
+    //cy.get(".success-page").should("be.visible");
 
     cy.url().should("include", "/boards");
 
@@ -34,7 +37,7 @@ describe("Login test", () => {
 
     cy.get('button[data-test-id="header-create-board-button"]').click();
 
-    const boardName = `MY Project - ${Date.now()}`;
+    const boardName = `My board - ${Date.now()}`;
 
     cy.get('input[placeholder="Add board title"]').focus().type(boardName);
 
@@ -43,7 +46,7 @@ describe("Login test", () => {
 
     // Add new card to the board
 
-    cy.get("input.list-name-input").type("To Do");
+    cy.get("input.list-name-input").type("List 1");
 
     cy.get("input[type=submit]").contains("Add List").click();
 
@@ -54,7 +57,7 @@ describe("Login test", () => {
     );
 
     cy.contains("Add Card").click();
-    cy.screenshot();
+
     cy.wait(5000);
 
     // Add description to the card
@@ -66,23 +69,6 @@ describe("Login test", () => {
     cy.wait(5000);
     //cy.contains("Save").click();
     cy.get("input[type=submit]").contains("Save").click();
-    //Add comments to the card
-
-    // cy.get('textarea[placeholder="Write a comment…"]').type("Done");
-    //cy.get("input[type=submit]").contains("Save").click();
-
-    cy.get('textarea[placeholder="Write a comment…"]').type(
-      "working on this task"
-    );
-    cy.wait(5000);
-    //cy.get("input[type=submit]").contains("Save").click({
-    // force: true,
-    //});
-    //cy.get("[disabled]").click({ force: true });
-    cy.get("input[type=submit]").contains("Save").click();
-    // take screenshot
     cy.screenshot();
-
-    //cy.get("a").contains("Delete").click();
   });
 });
