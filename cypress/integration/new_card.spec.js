@@ -53,17 +53,10 @@ describe("Login test", () => {
     cy.get('textarea[placeholder="Write a comment…"]').type(
       "working on this task"
     );
-    cy.wait(5000);
-    //cy.get("input[type=submit]").contains("Save").click({
-    // force: true,
-    //});
-    //cy.get("[disabled]").click({ force: true });
-    // cy.get("input[type=submit]").contains("Save").click();
+
     cy.wait(5000);
     cy.get(".js-tab-parent").children().contains("Save").click();
     // take screenshot
     cy.screenshot();
-
-    //cy.get("a").contains("Delete").click();
   });
 });
