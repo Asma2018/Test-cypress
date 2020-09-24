@@ -7,27 +7,15 @@ describe("Login test", () => {
     cy.visit("https://trello.com/login");
 
     // Fill the username
-
-    cy.get("input[name=user]")
-
-      .first()
-
-      .type(email)
-
-      .should("have.value", email);
+    cy.get("input[name=user]").first().type(email).should("have.value", email);
 
     // Fill the password
-
     cy.get("input[name=password]")
-
       .type(password)
-
       .should("have.value", password);
 
     // Locate and submit the form
-
     cy.get("#login-form").submit();
-    //cy.get(".success-page").should("be.visible");
 
     cy.url().should("include", "/boards");
 
@@ -45,7 +33,6 @@ describe("Login test", () => {
     cy.wait(5000);
 
     // Add new card to the board
-
     cy.get("input.list-name-input").type("List 1");
 
     cy.get("input[type=submit]").contains("Add List").click();
@@ -61,13 +48,11 @@ describe("Login test", () => {
     cy.wait(5000);
 
     // Add description to the card
-
     cy.contains("My card title").click();
     cy.get('textarea[placeholder="Add a more detailed description…"]').type(
       "deadline for this Task is Thursday"
     );
     cy.wait(5000);
-    //cy.contains("Save").click();
     cy.get("input[type=submit]").contains("Save").click();
     cy.screenshot();
   });
