@@ -10,7 +10,16 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
+Cypress.Commands.add("login", (email, password) => {
+  cy.visit("https://trello.com/login");
+  cy.get("input[name=user]").first().type(email).should("have.value", email);
+
+  // Fill the password
+  cy.get("input[name=password]").type(password).should("have.value", password);
+
+  // Locate and submit the form
+  cy.get("#login-form").submit();
+});
 //
 //
 // -- This is a child command --

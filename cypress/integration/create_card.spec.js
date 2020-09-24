@@ -3,29 +3,18 @@
 import { password, email } from "./constants";
 
 describe("Login test", () => {
-  it("Fill login form", () => {
-    cy.visit("https://trello.com/login");
-
-    // Fill the username
-    cy.get("input[name=user]").first().type(email).should("have.value", email);
-
-    // Fill the password
-    cy.get("input[name=password]")
-      .type(password)
-      .should("have.value", password);
-
-    // Locate and submit the form
-    cy.get("#login-form").submit();
+  it("login form", () => {
+    cy.login(email, password);
 
     cy.url().should("include", "/boards");
 
-    //cy.get("button").contains("Remind me later").click();
+    cy.get("button").contains("Remind me later").click();
 
     cy.get('button[aria-label="Create Board or Team"]').click();
 
     cy.get('button[data-test-id="header-create-board-button"]').click();
 
-    const boardName = `My board - ${Date.now()}`;
+    const boardName = `My board`;
 
     cy.get('input[placeholder="Add board title"]').focus().type(boardName);
 
