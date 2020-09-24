@@ -14,7 +14,7 @@ describe("Login test", () => {
 
     cy.get('button[data-test-id="header-create-board-button"]').click();
 
-    const boardName = `MY Project - ${Date.now()}`;
+    const boardName = `MY board`;
 
     cy.get('input[placeholder="Add board title"]').focus().type(boardName);
 
@@ -29,8 +29,9 @@ describe("Login test", () => {
 
     cy.get("a").contains("Add a card").click();
 
+    const cardTitle = "My card title";
     cy.get('textarea[placeholder="Enter a title for this card…"]').type(
-      "My card title"
+      cardTitle
     );
 
     cy.contains("Add Card").click();
@@ -38,7 +39,7 @@ describe("Login test", () => {
     cy.wait(5000);
 
     // Add description to the card
-    cy.contains("My card title").click();
+    cy.contains(cardTitle).click();
     cy.get('textarea[placeholder="Add a more detailed description…"]').type(
       "deadline for this Task is Thursday"
     );
@@ -46,8 +47,8 @@ describe("Login test", () => {
     cy.get("input[type=submit]").contains("Save").click();
 
     //Add comments to the card
-    // cy.get('textarea[placeholder="Write a comment…"]').type("Done");
-    //cy.get("input[type=submit]").contains("Save").click();
+    cy.get('textarea[placeholder="Write a comment…"]').type("Done");
+    cy.get("input[type=submit]").contains("Save").click();
 
     cy.get('textarea[placeholder="Write a comment…"]').type(
       "working on this task"
@@ -57,7 +58,9 @@ describe("Login test", () => {
     // force: true,
     //});
     //cy.get("[disabled]").click({ force: true });
-    cy.get("input[type=submit]").contains("Save").click();
+    // cy.get("input[type=submit]").contains("Save").click();
+    cy.wait(5000);
+    cy.get(".js-tab-parent").children().contains("Save").click();
     // take screenshot
     cy.screenshot();
 
