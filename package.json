@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open"
+    "test": "cypress open",
+    "test-chrome": "cypress run --browser chrome",
+    "test-firefox": "cypress run --browser firefox",
+    "test-edge": "cypress run --browser edge"
   },
   "author": "",
   "license": "ISC",
