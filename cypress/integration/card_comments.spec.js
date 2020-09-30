@@ -8,7 +8,7 @@ describe("Login test", () => {
 
     cy.url().should("include", "/boards");
 
-    cy.get("button").contains("Remind me later").click();
+    //cy.get("button").contains("Remind me later").click();
 
     cy.get('button[aria-label="Create Board or Team"]').click();
 
